@@ -1,4 +1,4 @@
-🔮 ### Hotel Booking Prediction with Automated MLOps
+### 🔮Hotel Booking Prediction with Automated MLOps
 Tools: MLflow · Jenkins · Flask · GCP · CI/CD  
 📊 Real-time forecasting · Scalable deployment · End-to-end automation
 
