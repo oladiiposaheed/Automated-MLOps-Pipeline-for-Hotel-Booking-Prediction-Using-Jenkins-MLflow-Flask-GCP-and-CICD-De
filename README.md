@@ -1,4 +1,4 @@
-*****Hotel Booking Prediction with Automated MLOps Pipeline*****
+****Hotel Booking Prediction with Automated MLOps Pipeline****
 - Tools Used: MLflow · Jenkins · Flask · GCP · CI/CD
 - ✅ What It Does:
 - Predicts hotel booking status using machine learning
