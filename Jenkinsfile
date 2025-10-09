@@ -1,4 +1,4 @@
-// Clone code from github to jenkins
+
 pipeline {
     agent any
     // Create venv in a Jenkins
@@ -22,7 +22,6 @@ pipeline {
                     echo 'Setting up our Virtual Environment and Installing Dependencies...'
                     sh '''
                     python -m venv ${VENV_DIR}
-                    // Activate the environment
                     . ${VENV_DIR}/bin/activate
                     pip install --upgrade pip
                     pip install -e .
