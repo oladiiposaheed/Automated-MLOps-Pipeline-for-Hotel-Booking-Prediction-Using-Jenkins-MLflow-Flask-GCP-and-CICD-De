@@ -1,7 +1,6 @@
 // Clone code from github to jenkins
 pipeline {
-    agent any 
-
+    agent any
     // Create venv in a Jenkins
     environment {
         VENV_DIR = 'venv'
@@ -16,22 +15,20 @@ pipeline {
                 }
             }
         }
-
-    // Stage for creating venv in a Jenkins
-    stage('Setting up our Virtual Environment and Installing Dependencies') {
-        steps {
-            script {
-                echo 'Setting up our Virtual Environment and Installing Dependencies...'
-                sh '''
-                python -m venv ${VENV_DIR}
-
-                // Activate the environment
-                . ${VENV_DIR}/bin/activate
-                pip install --upgrade pip
-                pip install -e .
-                '''
+        // Stage for creating venv in a Jenkins
+        stage('Setting up our Virtual Environment and Installing Dependencies') {
+            steps {
+                script {
+                    echo 'Setting up our Virtual Environment and Installing Dependencies...'
+                    sh '''
+                    python -m venv ${VENV_DIR}
+                    // Activate the environment
+                    . ${VENV_DIR}/bin/activate
+                    pip install --upgrade pip
+                    pip install -e .
+                    '''
+                }
             }
         }
-    }
     }
 }
