@@ -19,7 +19,7 @@ class CustomException(Exception):
         # Check if the object passed as error_detail has the exc_info method (i.e., is the sys module)
         if hasattr(error_detail, 'exc_info'):
             # The structure of the error detail tuple is (type, value, traceback object)
-            _, _, exc_tb = error_detail.exc_info()
+            _, _, exc_tb = traceback.sys.exc_info()
             
             # The traceback object (exc_tb) holds information about where the error occurred
             file_name = exc_tb.tb_frame.f_code.co_filename
