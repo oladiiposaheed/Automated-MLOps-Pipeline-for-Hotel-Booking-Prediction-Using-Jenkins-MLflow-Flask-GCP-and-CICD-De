@@ -18,15 +18,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements.txt FIRST to leverage Docker's cache
-COPY requirements.txt .
-
-# Copy the rest of the application code
-COPY . .
-
 # Copy the requirements file and install dependencies into the container
+
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-#RUN pip install --no-cache-dir -e .
+
+# Copy the rest of the application
+COPY . .
 
 # Train the model and generate artifacts
 RUN python pipeline/training_pipeline.py
