@@ -20,11 +20,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy the requirements file and install dependencies into the container
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application
 COPY . .
+
+# Install the package in editable mode
+RUN pip install --no-cache-dir -e .
 
 # Train the model and generate artifacts
 RUN python pipeline/training_pipeline.py
