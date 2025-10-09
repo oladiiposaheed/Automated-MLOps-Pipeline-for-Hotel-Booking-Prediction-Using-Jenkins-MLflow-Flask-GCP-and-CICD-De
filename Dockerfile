@@ -24,8 +24,9 @@ COPY requirements.txt .
 # Copy the rest of the application code
 COPY . .
 
-# Copy the requirements file into the container
-RUN pip install --no-cache-dir -e .
+# Copy the requirements file and install dependencies into the container
+RUN pip install --no-cache-dir -r requirements.txt
+#RUN pip install --no-cache-dir -e .
 
 # Train the model and generate artifacts
 RUN python pipeline/training_pipeline.py
