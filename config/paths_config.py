@@ -1,5 +1,5 @@
 import os # Imports the 'os' module, essential for file path manipulation and system-level operations.
-
+from pathlib import Path
 # *----------------- Data Ingestion Paths and Setup ---------------*
 # Defines the base directory where all raw and split data artifacts will be stored.
 RAW_DIR = "artifacts/raw"
@@ -28,4 +28,11 @@ PROCESSED_TEST_DATA_PATH = os.path.join(PROCESSED_DIR, 'processed_test.csv')
 
 
 # -------------------- Model Training --------------------
-MODEL_OUTPUT_PATH = 'artifacts/models/lgbm_model.pkl'
+# New
+BASE_DIR = Path(__file__).resolve().parent.parent  # points to hotel_reservation/
+MODEL_OUTPUT_PATH = BASE_DIR / 'artifacts' / 'models' / 'lgbm_model.pkl'
+
+
+
+#MODEL_OUTPUT_PATH = 'artifacts/models/lgbm_model.pkl'
+

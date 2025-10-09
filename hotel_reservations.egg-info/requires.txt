@@ -13,3 +13,5 @@ jinja2
 imbalanced-learn
 lightgbm
 mlflow
+flask
+django

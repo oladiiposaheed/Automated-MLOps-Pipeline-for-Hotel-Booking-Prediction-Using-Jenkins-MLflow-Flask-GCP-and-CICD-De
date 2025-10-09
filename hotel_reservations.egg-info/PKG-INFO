@@ -17,5 +17,7 @@ Requires-Dist: jinja2
 Requires-Dist: imbalanced-learn
 Requires-Dist: lightgbm
 Requires-Dist: mlflow
+Requires-Dist: flask
+Requires-Dist: django
 Dynamic: author
 Dynamic: requires-dist
