@@ -1,41 +1,46 @@
-# Use the official Python image as the base
 FROM python:slim
 
-# Prevent Python from writing .pyc files (FIXED SYNTAX)
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# Prevent Python from writing .pyc files
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Set/create the working directory inside the container
 WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
     libgomp1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy all the requirements file and install dependencies into the container
-COPY . .
+# Copy requirements first for better caching
+COPY requirements.txt .
 
-# Install build tools
+# Debug: Show what's in requirements.txt
+RUN echo "=== Checking requirements.txt ===" && \
+    cat requirements.txt && \
+    echo "=== Files in current directory ===" && \
+    ls -la
+
+# Install build tools and upgrade pip
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir setuptools wheel
 
-# Install dependencies from requirements.txt FIRST
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies with verbose output
+RUN pip install --no-cache-dir -v -r requirements.txt
 
-# THEN install the package in editable mode
+# Copy the rest of the application
+COPY . .
+
+# Install in editable mode
 RUN pip install --no-cache-dir -e .
 
-# Train the model and generate artifacts
+# Train the model (if this fails, the build will stop)
 RUN python pipeline/training_pipeline.py
 
-# Copy the startup script
 COPY start_services.sh .
-
-# Make the script executable
 RUN chmod +x start_services.sh
 
-# Expose both ports: 8000 for Django and 5000 for Flask development server
 EXPOSE 8000 5000
-
 CMD ["/app/start_services.sh"]
