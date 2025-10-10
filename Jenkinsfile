@@ -58,5 +58,28 @@ pipeline{
                 }
             }
         }
+
+        stage('Deploy Docker Image from GCR to Google Cloudd Run'){
+            steps{
+                withCredentials([file(credentialsId: 'gcp_key', variable:'GOOGLE_APPLICATION_CREDENTIALS')]){
+                    script{
+                        echo 'Deploy Docker Image from GCR to Google Cloudd Run.......'
+                        sh '''
+                        export PATH=$PATH:${GCLOUD_PATH}
+
+                        gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+
+                        gcloud config set project ${GCP_PROJECT}
+                        
+                        gcloud run deploy mlop project-1 \
+                            --image=gcr.io/${GCP_PROJECT}/mlop-project-1:latest \
+                            --platform=managed \
+                            --region=us-central1 \
+                            --allow=unauthenticated 
+                        '''
+                    }
+                }
+            }
+        }
     }
 }
