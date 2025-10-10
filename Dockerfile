@@ -23,5 +23,7 @@ RUN pip install --no-cache-dir -e .
 COPY start_services.sh .
 RUN chmod +x start_services.sh
 
-EXPOSE 8000 5000
+# EXPOSE 8000 5000
+
+# Command for Cloud Run
 CMD ["/app/start_services.sh"]
