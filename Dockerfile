@@ -1,23 +1,20 @@
-# Create python image
-
 # Use the official Python image as the base
 FROM python:slim
 
-# Prevent Python from writing .pyc files
-ENV PYTHONDONTWRITEBYTECODE = 1 \
-    PYTHONUNBUFFERED = 1
+# Prevent Python from writing .pyc files (FIXED SYNTAX)
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 # Set/create the working directory inside the container
 WORKDIR /app
 
-#Run dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy all the requirements file and install dependencies into the container
-
 COPY . .
 
 # Install build tools
@@ -35,7 +32,7 @@ RUN python pipeline/training_pipeline.py
 # Copy the startup script
 COPY start_services.sh .
 
-# Make the script executable (Linux container needs this)
+# Make the script executable
 RUN chmod +x start_services.sh
 
 # Expose both ports: 8000 for Django and 5000 for Flask development server
