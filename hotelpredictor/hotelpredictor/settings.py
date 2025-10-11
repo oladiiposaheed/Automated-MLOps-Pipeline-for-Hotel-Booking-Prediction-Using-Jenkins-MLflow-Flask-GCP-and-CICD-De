@@ -25,7 +25,14 @@ SECRET_KEY = 'django-insecure-95^us#2)n8*&ewi73zx#r&dd0f#)h@30x24bb7z+*qo)2do)q7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+
+# Add this new
+ALLOWED_HOSTS = [
+    '.run.app',  # Allows all Cloud Run domains
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
