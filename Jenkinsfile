@@ -71,7 +71,7 @@ pipeline{
 
                         gcloud config set project ${GCP_PROJECT}
                         
-                        gcloud run deploy mlop project-1 \
+                        gcloud run deploy mlop-project-1 \
                             --image=gcr.io/${GCP_PROJECT}/mlop-project-1:latest \
                             --platform=managed \
                             --region=us-central1 \
