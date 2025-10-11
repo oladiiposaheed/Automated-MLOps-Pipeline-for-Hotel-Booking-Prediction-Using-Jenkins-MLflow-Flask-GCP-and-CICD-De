@@ -1,4 +1,5 @@
 import joblib
+import os
 import numpy as np
 from flask import Flask, render_template, request
 
@@ -78,4 +79,8 @@ def index():
 if __name__=="__main__":
     # Note: host='0.0.0.0' makes it externally accessible (useful for deployment/VMs)
     # Use debug=True for local development to see code changes instantly
-    app.run(host='0.0.0.0' , port=8080, debug=True)
+    #app.run(host='0.0.0.0' , port=8080, debug=True)
+    
+   
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port, debug=False)
