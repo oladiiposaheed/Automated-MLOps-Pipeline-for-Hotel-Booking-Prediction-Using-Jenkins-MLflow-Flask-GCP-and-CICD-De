@@ -10,5 +10,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 RUN pip install --no-cache-dir -e .
 
-# Direct CMD - no script needed
-CMD python -c "from http.server import HTTPServer, SimpleHTTPRequestHandler; HTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler).serve_forever()"
+# Start Django
+CMD ["python", "hotel_reservation/hotelpredictor/manage.py", "runserver", "0.0.0.0:8080"]
