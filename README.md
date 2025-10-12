@@ -1,5 +1,5 @@
 ### 🔮Hotel Booking Prediction with Automated MLOps
-Tools: MLflow · Jenkins · Flask · GCP · CI/CD  
+Tools: MLflow · Docker . Jenkins . Django · Flask . HTML . Bootstrap · GCP · CI/CD  
 📊 Real-time forecasting · Scalable deployment · End-to-end automation
 
 **Problem Statement**  
